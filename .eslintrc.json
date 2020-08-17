@@ -1,0 +1,22 @@
+{
+    "parserOptions": {
+        "ecmaVersion": 11,
+        "sourceType": "script",
+        "ecmaFeatures": {
+            "jsx": true
+        }
+    },
+    "rules": {
+        "semi": "error",
+		"no-console": "error",
+		"no-unexpected-multiline": "error",
+		"no-undef": "off",
+		"no-unused-vars": "off",
+		"no-constant-condition": "error"
+    },
+    "env": {
+        "browser": true,
+        "node": true
+    },
+	"extends": "eslint:recommended"
+}

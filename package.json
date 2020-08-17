@@ -1,0 +1,26 @@
+{
+	"name": "broadcastem-cli",
+	"version": "1.0.0",
+	"description": "CLI interface for broadcastem-core",
+	"keywords": [
+		"broadcast",
+		"share",
+		"local network",
+		"file share",
+		"cli"
+	],
+	"main": "index.js",
+	"bin": "index.js",
+	"repository": {
+		"type": "git",
+		"url": "https://gitlab.com/riskycase/broadcastem-cli.git"
+	},
+	"author": "Hrishikesh Patil <hrishikeshpatil.754@gmail.com> (https://riskycase.netlify.app/)",
+	"license": "MIT",
+	"homepage": "https://gitlab.com/riskycase/broadcastem-cli/-/wikis/home",
+	"private": false,
+	"dependencies": {
+		"broadcastem-core": "^2.1.0",
+		"yargs": "^15.4.1"
+	}
+}
