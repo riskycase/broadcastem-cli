@@ -1,6 +1,6 @@
 {
 	"name": "broadcastem-cli",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "CLI interface for broadcastem-core",
 	"keywords": [
 		"broadcast",
@@ -22,5 +22,9 @@
 	"dependencies": {
 		"broadcastem-core": "^2.2.0",
 		"yargs": "^15.4.1"
+	},
+	"devDependencies": {
+		"husky": "^4.2.5",
+		"prettier": "^2.1.1"
 	}
 }

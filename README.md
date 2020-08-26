@@ -1,19 +1,25 @@
 # ![Logo](https://i.imgur.com/JAukmcD.png) Broadcast 'em CLI
-A CLI tool used to create file server based on node.js that allows sharing 
-files over HTTP on the same local network, and possibly over the internet if 
+
+A CLI tool used to create file server based on node.js that allows sharing
+files over HTTP on the same local network, and possibly over the internet if
 bridging is used
 
 ## Badges
+
 ![npm (prod) dependency version](https://img.shields.io/npm/dependency-version/broadcastem-cli/broadcastem-core)
 
 ## Setup
 
-Install using 
-* npm
+Install using
+
+-   npm
+
 ```
 	npm i broadcastem-cli -g
 ```
-* yarn
+
+-   yarn
+
 ```
 	yarn global add broadcastem-cli
 ```
@@ -25,9 +31,11 @@ $ broadcastem-cli
 ```
 
 ## Documentation
+
 [Wiki](https://gitlab.com/riskycase/broadcastem-cli/-/wikis/Home)
 
 ## License
+
 Copyright 2020 Hrishikesh Patil
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
