@@ -24,6 +24,7 @@
 		"yargs": "^15.4.1"
 	},
 	"devDependencies": {
+		"husky": "^4.2.5",
 		"prettier": "^2.1.1"
 	}
 }
