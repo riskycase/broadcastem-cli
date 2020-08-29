@@ -20,7 +20,7 @@
 	"homepage": "https://gitlab.com/riskycase/broadcastem-cli/-/wikis/home",
 	"private": false,
 	"dependencies": {
-		"broadcastem-core": "^2.2.0",
+		"broadcastem-core": "^2.2.1",
 		"yargs": "^15.4.1"
 	},
 	"devDependencies": {
