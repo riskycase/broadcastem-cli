@@ -1,0 +1,51 @@
+include:
+    - template: Dependency-Scanning.gitlab-ci.yml
+    - template: SAST.gitlab-ci.yml
+    - template: Code-Quality.gitlab-ci.yml
+    - template: License-Scanning.gitlab-ci.yml
+
+stages:
+    - test
+    - build
+    - post-test
+    - publish
+
+Build Latest:
+    cache:
+        key: node_modules-latest
+        paths:
+            - node_modules/
+    artifacts:
+        untracked: true
+        expire_in: 60s
+        paths:
+            - node_mudules/
+    image: node:latest
+    stage: build
+    needs: []
+    script:
+        - yarn install --frozen-lockfile
+
+Build LTS:
+    extends: 'Build Latest'
+    cache:
+        key: node_modules-lts
+    image: node:lts
+
+Lint:
+    stage: post-test
+    needs: ['Build Latest', 'Build LTS']
+    image: node:lts
+    script:
+        - yarn prettier --check .
+
+Publish:
+    stage: publish
+    needs: ['Lint']
+    image: node:lts
+    before_script:
+        - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
+    script:
+        - yarn publish
+    only:
+        - tags
