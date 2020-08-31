@@ -1,7 +1,12 @@
+v1.0.2
+
+Update core to 2.2.1
+Use LF instead of CRLF
+Publish from GitLab CI
+
 v1.0.1
 
 Update core to 2.2.0
-Use LF instead of CRLF
 Use prettier code format
 
 v1.0.0
