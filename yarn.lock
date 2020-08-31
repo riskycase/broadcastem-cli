@@ -124,10 +124,10 @@ brace-expansion@^1.1.7:
     balanced-match "^1.0.0"
     concat-map "0.0.1"
 
-broadcastem-core@^2.2.0:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/broadcastem-core/-/broadcastem-core-2.2.0.tgz#df44cf06cf9d9ca5a51888b6353ce693159f8460"
-  integrity sha512-hC+GiFYnDn3jwe9KQsp/EtC+lwR9AwhcmMd6eYnjAwoyKLJyt2H+1edYWOAsDaGMaWq2NiNLfh7H92GBUCOadA==
+broadcastem-core@^2.2.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/broadcastem-core/-/broadcastem-core-2.2.1.tgz#a8198179baa6098733c9b9bd01b8c46780e569eb"
+  integrity sha512-APd88/WR0FHW0offekk3bu/TnvT+qgzHkCCHPoTNynZqsqirVyilEXrtL6DTnIZWlSp2VPol029P0mnLeRGFcA==
   dependencies:
     express "^4.17.1"
     express-easy-zip "^1.1.5"
