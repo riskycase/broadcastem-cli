@@ -153,15 +153,26 @@ function onError(error) {
 function onListening() {
 	const addr = server.address();
 	if (typeof addr !== 'string') {
-		console.log('Listening on following addresses:');
+		const { Table } = require('console-table-printer');
+		const table = new Table({
+			title: 'Avaialble IP addresses',
+			columns: [
+				{ name: 'Interface', alignment: 'left' },
+				{ name: 'Address', alignment: 'left', color: 'green' },
+			],
+		});
+
 		const ni = os.networkInterfaces();
 		let addresses = new Object();
 		for (const iface in ni) {
 			const ip4 = ni[iface].find(iface => iface.family === 'IPv4');
 			if (!ip4.internal)
-				addresses[iface] = { Address: `${ip4.address}:${addr.port}` };
+				table.addRow({
+					Interface: iface,
+					Address: `${ip4.address}:${port}`,
+				});
 		}
-		console.table(addresses);
+		table.printTable();
 	} else console.log('Listening on pipe ' + addr);
 }
 
