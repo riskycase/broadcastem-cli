@@ -21,6 +21,7 @@
 	"private": false,
 	"dependencies": {
 		"broadcastem-core": "^2.2.1",
+		"console-table-printer": "^2.3.29",
 		"yargs": "^15.4.1"
 	},
 	"devDependencies": {
