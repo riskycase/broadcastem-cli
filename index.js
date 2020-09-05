@@ -152,9 +152,17 @@ function onError(error) {
 
 function onListening() {
 	const addr = server.address();
-	const bind =
-		typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr.port;
-	console.log('Listening on ' + bind);
+	if (typeof addr !== 'string') {
+		console.log('Listening on following addresses:');
+		const ni = os.networkInterfaces();
+		let addresses = new Object();
+		for (const iface in ni) {
+			const ip4 = ni[iface].find(iface => iface.family === 'IPv4');
+			if (!ip4.internal)
+				addresses[iface] = { Address: `${ip4.address}:${addr.port}` };
+		}
+		console.table(addresses);
+	} else console.log('Listening on pipe ' + addr);
 }
 
 /**
