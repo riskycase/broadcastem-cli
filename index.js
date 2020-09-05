@@ -95,32 +95,6 @@ if (argv.coreVersion) {
 }
 
 /**
- * Normalize a port into a number, string, or false.
- */
-
-function normalizePort(val) {
-	const port = parseInt(val, 10);
-
-	if (isNaN(port)) {
-		// named pipe
-		return val;
-	}
-
-	if (port >= 0) {
-		// port number
-		return port;
-	}
-
-	return false;
-}
-
-/**
- * Get port from environment and store in Express.
- */
-
-const port = normalizePort(argv.port);
-
-/**
  * Event listener for HTTP server "error" event.
  */
 
@@ -129,16 +103,14 @@ function onError(error) {
 		throw error;
 	}
 
-	const bind = typeof port === 'string' ? 'Pipe ' + port : 'Port ' + port;
-
 	// handle specific listen errors with friendly messages
 	switch (error.code) {
 		case 'EACCES':
-			console.error(bind + ' requires elevated privileges');
+			console.error(argv.port + ' requires elevated privileges');
 			process.exit(1);
 			break;
 		case 'EADDRINUSE':
-			console.error(bind + ' is already in use');
+			console.error(argv.port + ' is already in use');
 			process.exit(1);
 			break;
 		default:
@@ -152,28 +124,26 @@ function onError(error) {
 
 function onListening() {
 	const addr = server.address();
-	if (typeof addr !== 'string') {
-		const { Table } = require('console-table-printer');
-		const table = new Table({
-			title: 'Avaialble IP addresses',
-			columns: [
-				{ name: 'Interface', alignment: 'left' },
-				{ name: 'Address', alignment: 'left', color: 'green' },
-			],
-		});
+	const { Table } = require('console-table-printer');
+	const table = new Table({
+		title: 'Avaialble IP addresses',
+		columns: [
+			{ name: 'Interface', alignment: 'left' },
+			{ name: 'Address', alignment: 'left', color: 'green' },
+		],
+	});
 
-		const ni = os.networkInterfaces();
-		let addresses = new Object();
-		for (const iface in ni) {
-			const ip4 = ni[iface].find(iface => iface.family === 'IPv4');
-			if (!ip4.internal)
-				table.addRow({
-					Interface: iface,
-					Address: `${ip4.address}:${port}`,
-				});
-		}
-		table.printTable();
-	} else console.log('Listening on pipe ' + addr);
+	const ni = os.networkInterfaces();
+	let addresses = new Object();
+	for (const iface in ni) {
+		const ip4 = ni[iface].find(iface => iface.family === 'IPv4');
+		if (ip4 && !ip4.internal)
+			table.addRow({
+				Interface: iface,
+				Address: `${ip4.address}:${argv.port}`,
+			});
+	}
+	table.printTable();
 }
 
 /**
@@ -193,7 +163,7 @@ broadcastemCore
 		 * Listen on provided port, on all network interfaces.
 		 */
 
-		server.listen(port);
+		server.listen(argv.port);
 		server.on('error', onError);
 		server.on('listening', onListening);
 	})
