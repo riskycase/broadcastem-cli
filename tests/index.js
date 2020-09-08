@@ -7,6 +7,8 @@ const mocha = new Mocha({
 	reporterOptions: {
 		testCaseSwitchClassnameAndName: true,
 	},
+	timeout: 10000,
+	slow: 2500,
 });
 
 fs.readdir(__dirname)

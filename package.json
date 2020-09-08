@@ -11,6 +11,9 @@
 	],
 	"main": "index.js",
 	"bin": "index.js",
+	"scripts": {
+		"test": "node tests/index.js"
+	},
 	"repository": {
 		"type": "git",
 		"url": "https://gitlab.com/riskycase/broadcastem-cli.git"

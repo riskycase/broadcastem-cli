@@ -7,6 +7,7 @@ include:
 stages:
     - test
     - build
+    - testing
     - post-test
     - publish
 
@@ -26,10 +27,44 @@ Build Latest:
     script:
         - yarn install --frozen-lockfile
 
+Test Latest:
+    stage: testing
+    needs: ['Build Latest']
+    image: node:latest
+    before_script:
+        - yarn global add nyc
+    script:
+        - nyc yarn test
+    artifacts:
+        reports:
+            junit: test-results.xml
+        expire_in: 60s
+        paths:
+            - .nyc_output/
+
+Coverage Latest:
+    stage: post-test
+    needs: ['Test Latest']
+    image: node:latest
+    before_script:
+        - yarn global add nyc
+    script:
+        - nyc report
+
 Build LTS:
     extends: 'Build Latest'
     cache:
         key: node_modules-lts
+    image: node:lts
+
+Test LTS:
+    extends: 'Test Latest'
+    needs: ['Build LTS']
+    image: node:lts
+
+Coverage LTS:
+    extends: 'Coverage Latest'
+    needs: ['Test LTS']
     image: node:lts
 
 Lint:
@@ -41,7 +76,7 @@ Lint:
 
 Publish:
     stage: publish
-    needs: ['Lint']
+    needs: ['Lint', 'Test Latest', 'Test LTS']
     image: node:lts
     before_script:
         - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
