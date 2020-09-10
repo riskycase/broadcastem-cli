@@ -181,16 +181,16 @@ braces@~3.0.2:
   dependencies:
     fill-range "^7.0.1"
 
-broadcastem-core@^2.2.1:
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/broadcastem-core/-/broadcastem-core-2.2.1.tgz#a8198179baa6098733c9b9bd01b8c46780e569eb"
-  integrity sha512-APd88/WR0FHW0offekk3bu/TnvT+qgzHkCCHPoTNynZqsqirVyilEXrtL6DTnIZWlSp2VPol029P0mnLeRGFcA==
+broadcastem-core@^2.2.3:
+  version "2.2.3"
+  resolved "https://registry.yarnpkg.com/broadcastem-core/-/broadcastem-core-2.2.3.tgz#5e07e8a0b803662bc251effa740fb1d43e062189"
+  integrity sha512-8zBVDu55oxFsHt0gSu5ysmijkYoPTPeQoHQ+/nfO47Xd/6a8RGG71xQEF+feQQ8ILu+Hd7rL9hZyYmElk2I2zQ==
   dependencies:
     express "^4.17.1"
     express-easy-zip "^1.1.5"
     morgan "^1.10.0"
     multer "^1.4.2"
-    uikit "^3.5.6"
+    uikit "^3.5.7"
     yargs "^15.4.1"
 
 browser-stdout@1.3.1:
@@ -1718,10 +1718,10 @@ typedarray@^0.0.6:
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
-uikit@^3.5.6:
-  version "3.5.6"
-  resolved "https://registry.yarnpkg.com/uikit/-/uikit-3.5.6.tgz#227599121ff61b53d83708fea4c4513efb3eeb16"
-  integrity sha512-nAJ/HzfXvkpKhI43g0zUj0ObRIMnlxpGiFKuwnVY/CnVkOgCu3QfgDuOVBwjEDAlwBBTYinRFg2qiam68DIlqw==
+uikit@^3.5.7:
+  version "3.5.7"
+  resolved "https://registry.yarnpkg.com/uikit/-/uikit-3.5.7.tgz#2376be4272d086eb52be62cc679e55f266a693f2"
+  integrity sha512-X9im58e6c7IsQopy80TXizv3LXeBaUKTa5fseE/F8UV0jryPnU7JYBl2/1QGrX5IN9hbOb6UJB4o2wdElGJoxg==
 
 unpipe@1.0.0, unpipe@~1.0.0:
   version "1.0.0"
