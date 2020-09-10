@@ -1,6 +1,6 @@
 {
 	"name": "broadcastem-cli",
-	"version": "1.0.2",
+	"version": "1.1.0",
 	"description": "CLI interface for broadcastem-core",
 	"keywords": [
 		"broadcast",
