@@ -1,6 +1,6 @@
 {
 	"name": "broadcastem-cli",
-	"version": "1.0.2",
+	"version": "1.1.0",
 	"description": "CLI interface for broadcastem-core",
 	"keywords": [
 		"broadcast",
@@ -23,8 +23,8 @@
 	"homepage": "https://gitlab.com/riskycase/broadcastem-cli/-/wikis/home",
 	"private": false,
 	"dependencies": {
-		"broadcastem-core": "^2.2.1",
-		"console-table-printer": "^2.3.29",
+		"broadcastem-core": "^2.2.3",
+		"console-table-printer": "^2.3.32",
 		"yargs": "^15.4.1"
 	},
 	"devDependencies": {
