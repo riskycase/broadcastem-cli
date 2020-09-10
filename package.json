@@ -11,6 +11,9 @@
 	],
 	"main": "index.js",
 	"bin": "index.js",
+	"scripts": {
+		"test": "node tests/index.js"
+	},
 	"repository": {
 		"type": "git",
 		"url": "https://gitlab.com/riskycase/broadcastem-cli.git"
@@ -25,7 +28,10 @@
 		"yargs": "^15.4.1"
 	},
 	"devDependencies": {
-		"husky": "^4.2.5",
+		"chai": "^4.2.0",
+		"husky": "^4.3.0",
+		"mocha": "^8.1.3",
+		"mocha-junit-reporter": "^2.0.0",
 		"prettier": "^2.1.1"
 	}
 }
