@@ -123,27 +123,33 @@ function onError(error) {
  */
 
 function onListening() {
-	const addr = server.address();
-	const { Table } = require('console-table-printer');
-	const table = new Table({
-		title: 'Avaialble IP addresses',
-		columns: [
-			{ name: 'Interface', alignment: 'left' },
-			{ name: 'Address', alignment: 'left', color: 'green' },
-		],
-	});
-
 	const ni = os.networkInterfaces();
-	let addresses = new Object();
+	let addresses = [];
 	for (const iface in ni) {
 		const ip4 = ni[iface].find(iface => iface.family === 'IPv4');
 		if (ip4 && !ip4.internal)
-			table.addRow({
-				Interface: iface,
-				Address: `${ip4.address}:${argv.port}`,
-			});
+			addresses.push([iface, `${ip4.address}:${argv.port}`]);
 	}
-	table.printTable();
+
+	if (addresses.length) {
+		const { Table } = require('console-table-printer');
+		const table = new Table({
+			title: 'Avaialble IP addresses',
+			columns: [
+				{ name: 'Interface', alignment: 'left' },
+				{ name: 'Address', alignment: 'left', color: 'green' },
+			],
+		});
+		addresses.forEach(address =>
+			table.addRow({
+				Interface: address[0],
+				Address: address[1],
+			})
+		);
+		table.printTable();
+	} else {
+		console.log('No network interface detected! Starting anyway');
+	}
 }
 
 /**
