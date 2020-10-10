@@ -10,7 +10,7 @@ const broadcastemCore = require('broadcastem-core');
 const fs = require('fs');
 const os = require('os');
 
-let server;
+let server, interfaceTimer, addressCount;
 
 /**
  * Accept CLI arguments
@@ -119,37 +119,48 @@ function onError(error) {
 }
 
 /**
- * Event listener for HTTP server "listening" event.
+ * Scan for available interfaces periodically, starting from "listening" event
  */
 
-function onListening() {
-	const ni = os.networkInterfaces();
+function interfaceUpdater() {
 	let addresses = [];
+	const ni = os.networkInterfaces();
 	for (const iface in ni) {
 		const ip4 = ni[iface].find(iface => iface.family === 'IPv4');
 		if (ip4 && !ip4.internal)
 			addresses.push([iface, `${ip4.address}:${argv.port}`]);
 	}
 
-	if (addresses.length) {
-		const { Table } = require('console-table-printer');
-		const table = new Table({
-			title: 'Avaialble IP addresses',
-			columns: [
-				{ name: 'Interface', alignment: 'left' },
-				{ name: 'Address', alignment: 'left', color: 'green' },
-			],
-		});
-		addresses.forEach(address =>
-			table.addRow({
-				Interface: address[0],
-				Address: address[1],
-			})
-		);
-		table.printTable();
-	} else {
-		console.log('No network interface detected! Starting anyway');
+	if (addresses.length != addressCount) {
+		if (addresses.length) {
+			if (addressCount !== undefined)
+				console.log('Detected changes to the network interfaces');
+			const { Table } = require('console-table-printer');
+			const table = new Table({
+				title: 'Avaialble IP addresses',
+				columns: [
+					{ name: 'Interface', alignment: 'left' },
+					{ name: 'Address', alignment: 'left', color: 'green' },
+				],
+			});
+			addresses.forEach(address =>
+				table.addRow({
+					Interface: address[0],
+					Address: address[1],
+				})
+			);
+			table.printTable();
+		} else {
+			console.log(
+				addressCount === undefined
+					? 'No network interfaces online, starting anyway!'
+					: 'All network interfaces down'
+			);
+		}
+		addressCount = addresses.length;
+		console.log('');
 	}
+	interfaceTimer = setTimeout(interfaceUpdater, 2500);
 }
 
 /**
@@ -171,7 +182,7 @@ broadcastemCore
 
 		server.listen(argv.port);
 		server.on('error', onError);
-		server.on('listening', onListening);
+		server.on('listening', interfaceUpdater);
 	})
 	.catch(err => {
 		console.error(err);
@@ -190,7 +201,10 @@ broadcastemCore
 		}
 
 		process.on('SIGINT', function () {
-			if (server.listening) server.close();
+			if (server.listening) {
+				clearTimeout(interfaceTimer);
+				server.close();
+			}
 			console.log('Shutting down server');
 			process.exit();
 		});
