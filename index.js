@@ -131,36 +131,38 @@ function interfaceUpdater() {
 			addresses.push([iface, `${ip4.address}:${argv.port}`]);
 	}
 
-	if (addresses.length != addressCount) {
-		if (addresses.length) {
-			if (addressCount !== undefined)
-				console.log('Detected changes to the network interfaces');
-			const { Table } = require('console-table-printer');
-			const table = new Table({
-				title: 'Avaialble IP addresses',
-				columns: [
-					{ name: 'Interface', alignment: 'left' },
-					{ name: 'Address', alignment: 'left', color: 'green' },
-				],
-			});
-			addresses.forEach(address =>
-				table.addRow({
-					Interface: address[0],
-					Address: address[1],
-				})
-			);
-			table.printTable();
-		} else {
-			console.log(
-				addressCount === undefined
-					? 'No network interfaces online, starting anyway!'
-					: 'All network interfaces down'
-			);
-		}
-		addressCount = addresses.length;
-		console.log('');
-	}
-	interfaceTimer = setTimeout(interfaceUpdater, 2500);
+	if (addresses.length !== addressCount) displayInterfaces(addresses);
+	interfaceTimer = setTimeout(interfaceUpdater, 500);
+}
+
+/**
+ * Display the interfaces with the addresses
+ */
+
+function displayInterfaces(addresses) {
+	if (addresses.length) {
+		const { Table } = require('console-table-printer');
+		const table = new Table({
+			title: 'Avaialble IP addresses',
+			columns: [
+				{ name: 'Interface', alignment: 'left' },
+				{ name: 'Address', alignment: 'left', color: 'green' },
+			],
+		});
+		addresses.forEach(address =>
+			table.addRow({
+				Interface: address[0],
+				Address: address[1],
+			})
+		);
+		table.printTable();
+	} else
+		console.log(
+			'No interfaces detected, cannot determine IP addressof this machine'
+		);
+
+	addressCount = addresses.length;
+	console.log('');
 }
 
 /**
