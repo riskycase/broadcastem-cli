@@ -99,11 +99,6 @@ if (argv.coreVersion) {
  */
 
 function onError(error) {
-	if (error.syscall !== 'listen') {
-		throw error;
-	}
-
-	// handle specific listen errors with friendly messages
 	switch (error.code) {
 		case 'EACCES':
 			console.error(argv.port + ' requires elevated privileges');
@@ -191,17 +186,6 @@ broadcastemCore
 		process.exit(1);
 	})
 	.finally(() => {
-		if (process.platform === 'win32') {
-			const rl = require('readline').createInterface({
-				input: process.stdin,
-				output: process.stdout,
-			});
-
-			rl.on('SIGINT', function () {
-				process.emit('SIGINT');
-			});
-		}
-
 		process.on('SIGINT', function () {
 			if (server.listening) {
 				clearTimeout(interfaceTimer);
