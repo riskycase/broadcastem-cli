@@ -10,7 +10,7 @@ const broadcastemCore = require('broadcastem-core');
 const fs = require('fs');
 const os = require('os');
 
-let server;
+let server, interfaceTimer, addressCount;
 
 /**
  * Accept CLI arguments
@@ -99,11 +99,6 @@ if (argv.coreVersion) {
  */
 
 function onError(error) {
-	if (error.syscall !== 'listen') {
-		throw error;
-	}
-
-	// handle specific listen errors with friendly messages
 	switch (error.code) {
 		case 'EACCES':
 			console.error(argv.port + ' requires elevated privileges');
@@ -119,31 +114,50 @@ function onError(error) {
 }
 
 /**
- * Event listener for HTTP server "listening" event.
+ * Scan for available interfaces periodically, starting from "listening" event
  */
 
-function onListening() {
-	const addr = server.address();
-	const { Table } = require('console-table-printer');
-	const table = new Table({
-		title: 'Avaialble IP addresses',
-		columns: [
-			{ name: 'Interface', alignment: 'left' },
-			{ name: 'Address', alignment: 'left', color: 'green' },
-		],
-	});
-
+function interfaceUpdater() {
+	let addresses = [];
 	const ni = os.networkInterfaces();
-	let addresses = new Object();
 	for (const iface in ni) {
 		const ip4 = ni[iface].find(iface => iface.family === 'IPv4');
 		if (ip4 && !ip4.internal)
-			table.addRow({
-				Interface: iface,
-				Address: `${ip4.address}:${argv.port}`,
-			});
+			addresses.push([iface, `${ip4.address}:${argv.port}`]);
 	}
-	table.printTable();
+
+	if (addresses.length !== addressCount) displayInterfaces(addresses);
+	interfaceTimer = setTimeout(interfaceUpdater, 500);
+}
+
+/**
+ * Display the interfaces with the addresses
+ */
+
+function displayInterfaces(addresses) {
+	if (addresses.length) {
+		const { Table } = require('console-table-printer');
+		const table = new Table({
+			title: 'Avaialble IP addresses',
+			columns: [
+				{ name: 'Interface', alignment: 'left' },
+				{ name: 'Address', alignment: 'left', color: 'green' },
+			],
+		});
+		addresses.forEach(address =>
+			table.addRow({
+				Interface: address[0],
+				Address: address[1],
+			})
+		);
+		table.printTable();
+	} else
+		console.log(
+			'No interfaces detected, cannot determine IP addressof this machine'
+		);
+
+	addressCount = addresses.length;
+	console.log('');
 }
 
 /**
@@ -165,26 +179,18 @@ broadcastemCore
 
 		server.listen(argv.port);
 		server.on('error', onError);
-		server.on('listening', onListening);
+		server.on('listening', interfaceUpdater);
 	})
 	.catch(err => {
 		console.error(err);
 		process.exit(1);
 	})
 	.finally(() => {
-		if (process.platform === 'win32') {
-			const rl = require('readline').createInterface({
-				input: process.stdin,
-				output: process.stdout,
-			});
-
-			rl.on('SIGINT', function () {
-				process.emit('SIGINT');
-			});
-		}
-
 		process.on('SIGINT', function () {
-			if (server.listening) server.close();
+			if (server.listening) {
+				clearTimeout(interfaceTimer);
+				server.close();
+			}
 			console.log('Shutting down server');
 			process.exit();
 		});

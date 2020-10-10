@@ -1,5 +1,12 @@
 v1.1.0
 
+Update core to 2.2.4
+Check for network interfaces in a loop and display new IP addresses when
+changed
+Show a simple message instead of an empty table when no interface is up
+
+v1.1.0
+
 Update core to 2.2.3
 Show IP addresses in a table when starting server
 Add tests in CI
