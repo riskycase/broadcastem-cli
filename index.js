@@ -138,7 +138,7 @@ function displayInterfaces(addresses) {
 	if (addresses.length) {
 		const { Table } = require('console-table-printer');
 		const table = new Table({
-			title: 'Avaialble IP addresses',
+			title: 'Availble IP addresses',
 			columns: [
 				{ name: 'Interface', alignment: 'left' },
 				{ name: 'Address', alignment: 'left', color: 'green' },
@@ -153,7 +153,7 @@ function displayInterfaces(addresses) {
 		table.printTable();
 	} else
 		console.log(
-			'No interfaces detected, cannot determine IP addressof this machine'
+			'No interfaces detected, cannot determine IP address of this machine'
 		);
 
 	addressCount = addresses.length;

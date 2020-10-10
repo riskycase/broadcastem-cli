@@ -1,6 +1,6 @@
 {
 	"name": "broadcastem-cli",
-	"version": "1.2.0",
+	"version": "1.2.1",
 	"description": "CLI interface for broadcastem-core",
 	"keywords": [
 		"broadcast",
@@ -27,8 +27,8 @@
 	"private": false,
 	"dependencies": {
 		"broadcastem-core": "^2.2.4",
-		"console-table-printer": "^2.4.16",
-		"yargs": "^15.4.1"
+		"console-table-printer": "^2.4.17",
+		"yargs": "^16.0.3"
 	},
 	"devDependencies": {
 		"chai": "^4.2.0",

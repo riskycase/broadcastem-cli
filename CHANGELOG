@@ -1,4 +1,8 @@
-v1.1.0
+v1.2.1
+
+Fix typos in strings
+
+v1.2.0
 
 Update core to 2.2.4
 Check for network interfaces in a loop and display new IP addresses when
