@@ -379,10 +379,10 @@ concat-stream@^1.5.2:
     readable-stream "^2.2.2"
     typedarray "^0.0.6"
 
-console-table-printer@^2.4.17:
-  version "2.4.17"
-  resolved "https://registry.yarnpkg.com/console-table-printer/-/console-table-printer-2.4.17.tgz#fc984906d167b0e7592e20f37aa40d3a6fe21616"
-  integrity sha512-8akSFOr3mPaOSV/J05nyFMMuSJPhGWtk+dl73AgRx/5Up+F9+B0vRuwFtJTkPZHtHqWlsYmAkZmoPSketVqK0w==
+console-table-printer@^2.4.33:
+  version "2.4.33"
+  resolved "https://registry.yarnpkg.com/console-table-printer/-/console-table-printer-2.4.33.tgz#6f2832f7d474064d508b9b6c1d3ed89c932fab21"
+  integrity sha512-HGW9Rsab+dEMG5oQQK+TL2SzoCifFU/xEYvcUYjWgwnASyQKWWkDmcMKpEV8ov53YzNvJS+0hZZs/20zSyvmLA==
 
 content-disposition@0.5.3:
   version "0.5.3"
