@@ -88,6 +88,7 @@ if (argv.coreVersion) {
 		require(path.resolve(
 			require.resolve('broadcastem-core'),
 			'..',
+			'..',
 			'package.json'
 		)).version
 	);
@@ -161,11 +162,23 @@ function displayInterfaces(addresses) {
 }
 
 /**
+ * Exit the app
+ */
+
+function terminate() {
+	if (server.listening) {
+		clearTimeout(interfaceTimer);
+		server.close();
+	}
+	console.log('Shutting down server');
+	process.exit();
+}
+
+/**
  * Start Express app from the CLI flags
  */
 
-broadcastemCore
-	.init(argv)
+broadcastemCore(argv)
 	.then(app => {
 		/**
 		 * Create HTTP server.
@@ -186,12 +199,6 @@ broadcastemCore
 		process.exit(1);
 	})
 	.finally(() => {
-		process.on('SIGINT', function () {
-			if (server.listening) {
-				clearTimeout(interfaceTimer);
-				server.close();
-			}
-			console.log('Shutting down server');
-			process.exit();
-		});
+		process.on('SIGINT', terminate);
+		process.on('SIGTERM', terminate);
 	});
