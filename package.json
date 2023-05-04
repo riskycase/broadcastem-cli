@@ -28,7 +28,7 @@
 	"dependencies": {
 		"broadcastem-core": "^5.0.2",
 		"console-table-printer": "^2.8.2",
-		"yargs": "^16.2.0"
+		"yargs": "^17.7.2"
 	},
 	"devDependencies": {
 		"chai": "^4.3.4",
