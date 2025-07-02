@@ -379,10 +379,10 @@ concat-map@0.0.1:
   resolved "https://registry.yarnpkg.com/concat-map/-/concat-map-0.0.1.tgz#d8a96bd77fd68df7793a73036a3ba0d5405d477b"
   integrity sha1-2Klr13/Wjfd5OnMDajug1UBdR3s=
 
-console-table-printer@^2.8.2:
-  version "2.8.2"
-  resolved "https://registry.yarnpkg.com/console-table-printer/-/console-table-printer-2.8.2.tgz#1f8f8f53ebf9b82d1d8955e16c9ab3b3bbe1cf43"
-  integrity sha512-FwKE3l468O2mvFQsdttwuuTKnpTquHRMVw9KWuNhIUhj8qhkDbbrJzI9hduVFSchIp22LR5cEh+KIizWTWzZ2g==
+console-table-printer@^2.14.6:
+  version "2.14.6"
+  resolved "https://registry.yarnpkg.com/console-table-printer/-/console-table-printer-2.14.6.tgz#edfe0bf311fa2701922ed509443145ab51e06436"
+  integrity sha512-MCBl5HNVaFuuHW6FGbL/4fB7N/ormCy+tQ+sxTrF6QtSbSNETvPuOVbkJBhzDgYhvjWGrTma4eYJa37ZuoQsPw==
   dependencies:
     simple-wcswidth "^1.0.1"
 
